@@ -889,7 +889,7 @@
 								</header>
 								<!-- messageForm -->
 								<div class="messageForm">
-									<form id="contactForm" data-toggle="validator">
+									<form id="contactForm" data-toggle="validator" onsubmit="sendEmail(); reset(); return false;">
 										<div class="row">
 											<div class="col-12 col-sm-6">
 												<div class="form-group position-relative">
@@ -905,13 +905,13 @@
 											</div>
 											<div class="col-12 col-sm-6">
 												<div class="form-group position-relative">
-													<input type="sub" type="text" class="form-control w-100 d-block" required data-error="NEW ERROR MESSAGE">
+													<input id="subject" type="sub" type="text" class="form-control w-100 d-block" required data-error="NEW ERROR MESSAGE">
 													<label class="labelAbsolute mb-0 font-weight-normal position-absolute">Subject</label>
 												</div>
 											</div>
 											<div class="col-12 col-sm-6">
 												<div class="form-group position-relative">
-													<input type="tel" type="tel" class="form-control w-100 d-block" required data-error="NEW ERROR MESSAGE">
+													<input id="phone" type="tel" type="tel" class="form-control w-100 d-block" required data-error="NEW ERROR MESSAGE">
 													<label class="labelAbsolute mb-0 font-weight-normal position-absolute">Phone</label>
 												</div>
 											</div>
@@ -985,5 +985,23 @@
 	<script src="js/jqueryCustom.js"></script>
 	<!-- include fontAwesome -->
 	<script src="https://kit.fontawesome.com/391f644c42.js"></script>
+	<script src="https://smtpjs.com/v3/smtp.js"></script>
+	<script>
+		function sendEmail(){
+			Email.send({
+	SecureToken: "c9789128-41f0-4dd5-b5b1-b1d20cf3f966",
+    To : 'contact@mahadihassan.com.bd',
+    From : 'mahadihassanshaikat@gmail.com',
+    Subject : "New Contact Quiery",
+    Body : "Name: " + document.getElementById("name").value
+	+ "<br>Email: " + document.getElementById("email").value
+	+ "<br>Phone: " + document.getElementById("phone").value
+	+ "<br>Subject: " + document.getElementById("subject").value
+	+ "<br>Message: " + document.getElementById("message").value
+}).then(
+  message => alert(message)
+);
+		}
+	</script>
 </body>
 </html>
